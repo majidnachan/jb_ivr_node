@@ -4,7 +4,7 @@
     {
         "icon": "images/icon.png",
         "iconSmall": "images/iconSmall.png",
-        "category": "<CATEGORY_OF_APP_BASED_ON_DOCS>"
+        "category": "message"
     },
 
     "type": "REST",
@@ -12,9 +12,9 @@
     {
         "en-US":
         {
-            "name": "<NAME_OF_APP>",
-            "description": "<DESC_OF_APP>",
-            "step1Label": "Configure Activity"
+            "name": "IVR",
+            "description": "IVR Calling",
+            "step1Label": "Campaign Configuration"
         }
     },
     "arguments":
@@ -23,11 +23,11 @@
         {
             "inArguments": [
               { 
-                "SAMPLE_PARAM": "SAMPLE PARAM DATA FROM CONFIG.JSON"
+                "SubscriberKey": "{{Contact.Key}}"
               }
             ],
             "outArguments": [],
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/execute",
+            "url": "https://ivrdev.gourl.in/execute",
             "verb": "POST",
             "body": "",
             "header": "",
@@ -39,32 +39,35 @@
     
     "configurationArguments":
     {
-        "applicationExtensionKey": "<APP EXTENSION KEY>",
+        "applicationExtensionKey": "c787cb91-a1d7-435a-a99f-db06c4cb39c3",
         "save":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/save",
+            "url": "https://ivrdev.gourl.in/save",
             "verb": "POST",
             "useJwt": true
         },
         "publish":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/publish",
+            "url": "https://ivrdev.gourl.in/publish",
             "verb": "POST",
             "useJwt": true
         },
         "stop":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/stop",
+            "url": "https://ivrdev.gourl.in/stop",
             "verb": "POST",
             "useJwt": true
         },
         "validate":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/validate",
+            "url": "https://ivrdev.gourl.in/validate",
             "verb": "POST",
             "useJwt": true
         }
     },
+    "wizardSteps": [
+        { "label": "IVR Configuration", "key": "step1" }
+    ],
     "userInterfaces":
     {
         "configModal": {

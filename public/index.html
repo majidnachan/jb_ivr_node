@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>JOURNEY BUILDER APP TEMPLATE</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie-edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IVR Activity</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link href='https://fonts.googleapis.com/css?family=lobster' rel='stylesheet' type='text/css'>
-    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/fonts/SalesforceSans-Bold.ttf">
-    <link rel='stylesheet' href="css/styles.css">
-    
     <script type="text/javascript" src="js/require.js"></script>
     <script type="text/javascript">
-        (function() {
-            var config = {
-                baseUrl: 'js'
-            };
-            var dependencies = [
-                'customActivity'
-            ];
-            require(config, dependencies);
-        })();
+      (function () {
+        var config = {
+          baseUrl: "",
+        };
+
+        var dependencies = ["customActivity"];
+
+        require(config, dependencies);
+      })();
     </script>
 </head>
-
-
 <body>
-    <h1>THIS IS THE APP UI PORTION</h1>
-</body>
 
+<div class="container-fluid">
+    <form>
+        <div class="mb-3">
+          <label for="campignCode" class="form-label">Campaign Code</label>
+          <input type="text" class="form-control" id="campignCode" aria-describedby="campaignHelp">
+          <div id="campaignHelp" class="form-text">Insert the campaign code you want to integrate.</div>
+        </div>
+      </form>
+</div>
+
+</body>
 </html>

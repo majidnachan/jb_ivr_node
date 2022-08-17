@@ -1,7 +1,7 @@
 {
-  "name": "smsTemplate",
+  "name": "IVR Activity",
   "version": "1.0.1",
-  "description": "Send SMS Journey Builder",
+  "description": "IVR Calling from Journey Builder",
   "engines": {
     "node": "^12.12.16"
   },
@@ -18,7 +18,7 @@
     "salesforce marketing cloud",
     "heroku"
   ],
-  "author": "TheonThai",
+  "author": "Majid Nachan",
   "homepage": "",
   "dependencies": {
     "axios": "^0.21.2",
