@@ -4,6 +4,7 @@ define(['postmonger'], function (Postmonger) {
     let connection = new Postmonger.Session();
     let authTokens = {};
     let payload = {};
+    let campaignCode = '';
 
     // Configuration variables
     let eventSchema = ''; // variable is used in parseEventSchema()
@@ -19,6 +20,15 @@ define(['postmonger'], function (Postmonger) {
         connection.trigger('ready');
         connection.trigger('requestTokens');
         connection.trigger('requestEndpoints');
+
+        $("#campaignCode").on("input", function(){
+            campaignCode = $("#campaignCode").val();
+            if (campaignCode.length > 0) {
+              connection.trigger("updateButton", { button: "next", text: "done", visible: true, enabled: true });
+            }else {
+              connection.trigger("updateButton", { button: "next", text: "done", visible: true, enabled: false });
+            }
+        });
     }
 
     /**
@@ -38,7 +48,7 @@ define(['postmonger'], function (Postmonger) {
             payload = data;
         }
         initialLoad(data);
-        parseEventSchema();
+        // parseEventSchema();
     }
 
     /**
@@ -65,7 +75,39 @@ define(['postmonger'], function (Postmonger) {
      * e.g. input fields, select lists
      */
     function initialLoad(data) {
-    };
+        if (data) {
+            payload = data;
+          }
+      
+        let hasInArguments = Boolean(
+            payload["arguments"] &&
+            payload["arguments"].execute &&
+            payload["arguments"].execute.inArguments &&
+            payload["arguments"].execute.inArguments.length > 0
+        );
+      
+        let inArguments = hasInArguments
+            ? payload["arguments"].execute.inArguments
+            : {};
+      
+        $.each(inArguments, function (index, inArgument) {
+            $.each(inArgument, function (key, val) {
+                console.log("Key : " + key);
+                console.log("val : " + val);
+                if (key === "campaignCode") {
+                    campaignCode = val;
+                }
+            });
+        });
+      
+          // If there is no message selected, disable the next button
+        if (!campaignCode) {
+            connection.trigger("updateButton", { button: "next", text: "done", visible: true, enabled: false });
+            // If there is a message, skip to the summary step
+        }else {
+            $("#campaignCode").val(campaignCode);
+          }
+        };
 
 
     /**
@@ -82,7 +124,7 @@ define(['postmonger'], function (Postmonger) {
      */
     function parseEventSchema() {
         // Pulling data from the schema
-        connection.trigger('requestSchema');
+        /*connection.trigger('requestSchema');
         connection.on('requestedSchema', function (data) {
             // save schema
             let dataJson = data['schema'];
@@ -105,6 +147,6 @@ define(['postmonger'], function (Postmonger) {
                 }
             }
 
-        });
+        });*/
     }
 });
