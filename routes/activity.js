@@ -6,6 +6,7 @@ const Path = require('path');
 const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
 var util = require('util');
 let axios = require("axios");
+const { Console } = require('console');
 
 // Global Variables
 const tokenURL = `${process.env.authenticationUrl}/v2/token`;
@@ -25,13 +26,14 @@ function logData(req) {
         cookies: req.cookies,
         ip: req.ip,
         path: req.path,
-        host: req.host,
+        host: req.hostname,
         fresh: req.fresh,
         stale: req.stale,
         protocol: req.protocol,
         secure: req.secure,
         originalUrl: req.originalUrl
     });
+    console.log("================================");
     console.log("body: " + util.inspect(req.body));
     console.log("headers: " + req.headers);
     console.log("trailers: " + req.trailers);
@@ -43,7 +45,7 @@ function logData(req) {
     console.log("cookies: " + req.cookies);
     console.log("ip: " + req.ip);
     console.log("path: " + req.path);
-    console.log("host: " + req.host);
+    console.log("host: " + req.hostname);
     console.log("fresh: " + req.fresh);
     console.log("stale: " + req.stale);
     console.log("protocol: " + req.protocol);
@@ -68,13 +70,14 @@ exports.save = function (req, res) {
     // Data from the req and put it in an array accessible to the main app.
     //console.log( req.body );
     logData(req);
-    res.send(200, 'Save');
+    res.status(200).send("Save");
 };
 
 /*
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
+    console.log("Execute called");
     JWT(req.body, process.env.jwtSecret, (err, decoded) => {
         // verification error -> unauthorized request
         if (err) {
