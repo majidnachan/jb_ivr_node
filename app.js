@@ -34,6 +34,7 @@ app.post('/save', activity.save );
 app.post('/validate', activity.validate );
 app.post('/publish', activity.publish );
 app.post('/execute', activity.execute );
+app.post('/stop', activity.validate );
 
 
 /*http.createServer(app).listen(
