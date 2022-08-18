@@ -39,7 +39,7 @@ define(['postmonger'], function (Postmonger) {
     connection.on('requestedTriggerEventDefinition', function (eventDefinitionModel) {
         if (eventDefinitionModel) {
             eventDefinitionKey = eventDefinitionModel.eventDefinitionKey;
-            // console.log('Request Trigger >>>', JSON.stringify(eventDefinitionModel));
+            console.log('Request Trigger >>>', JSON.stringify(eventDefinitionModel));
         }
     });
 
@@ -56,13 +56,18 @@ define(['postmonger'], function (Postmonger) {
      * The config.json will be updated here if there are any updates to be done via Front End UI
      */
     function save() {
-        payload['arguments'].execute.inArguments = [
-            {
-                SAMPLE_PARAM: "SAMPLE PARAM DATA FROM CONFIG.JSON"
-            }
-        ];
-        payload['metaData'].isConfigured = true;
-        connection.trigger('updateActivity', payload);
+        console.log("Saved called");
+        campaignCode = $("#campaignCode").val();
+
+        // 'payload' is initialized on 'initActivity' above.
+        // Journey Builder sends an initial payload with defaults
+        // set by this activity's config.json file.  Any property
+        // may be overridden as desired.
+    
+        payload["arguments"].execute.inArguments = [{ campaignCode: campaignCode }];
+        payload["metaData"].isConfigured = true;
+        connection.trigger("updateActivity", payload);
+
     }
 
     /**
