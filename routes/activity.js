@@ -79,8 +79,9 @@ exports.save = function (req, res) {
 exports.execute = function (req, res) {
     console.log("Execute called");
     console.log(util.inspect(req.body));
-    /*JWT(req.body, process.env.jwtSecret, (err, decoded) => {
+    JWT(req.body, "r4Pbrt_109J7YLte-sndSwVbx7EZtr4FzsGZUYgTYlLRTWZEVdQV_ChYxedgw1XRkm0nwJnen0YBZMgx7tNOpzIAS4Edn82il2FcCYQMptmkn_6BQYQvp6i9FcIxodqHK9-zgS6_OJbYy-jPZru0Lviqs_Tv0ad5DiiHcANQE6GqRQy7vb3455eUF-veE_IQJSaaHDcwSfiRvKgt7jKR15ALnctwINGoUEgNA52m9QlV8cZDpXbwTRoHUVELog2", (err, decoded) => {
         // verification error -> unauthorized request
+        console.log(decoded);
         if (err) {
             console.error(err);
             return res.status(401).end();
@@ -94,7 +95,7 @@ exports.execute = function (req, res) {
             return res.status(400).end();
         }
 
-    });*/
+    });
 };
 
 
