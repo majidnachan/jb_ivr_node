@@ -22,8 +22,8 @@
         "execute":
         {
             "inArguments": [
-                { "SubscriberKey": "{{Contact.Key}}"},
-                { "MobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"}
+                { "subscriberKey": "{{Contact.Key}}"},
+                { "mobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"}
             ],
             "outArguments": [],
             "url": "https://ivrdev.gourl.in/execute",

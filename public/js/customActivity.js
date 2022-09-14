@@ -66,8 +66,8 @@ define(['postmonger'], function (Postmonger) {
     
         payload["arguments"].execute.inArguments = [{ 
             "campaignCode": campaignCode,
-            "SubscriberKey": "{{Contact.Key}}",
-            "MobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"
+            "subscriberKey": "{{Contact.Key}}",
+            "mobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"
         }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
