@@ -4,8 +4,7 @@ define(['postmonger'], function (Postmonger) {
     let connection = new Postmonger.Session();
     let authTokens = {};
     let payload = {};
-    let campaignCode = ''; 
-    let mobileNumber = '';
+    let campaignCode = '';
     let Mobile = ''; 
     let SubscriberKey = '';
 
@@ -61,7 +60,6 @@ define(['postmonger'], function (Postmonger) {
     function save() {
         console.log("Saved called");
         campaignCode = $("#campaignCode").val();
-        mobileNumber = $("#mobileNumber").val();
 
         // 'payload' is initialized on 'initActivity' above.
         // Journey Builder sends an initial payload with defaults
@@ -69,8 +67,7 @@ define(['postmonger'], function (Postmonger) {
         // may be overridden as desired.
     
         payload["arguments"].execute.inArguments = [{ 
-            "campaignCode": campaignCode, 
-            "mobileNumber": mobileNumber,
+            "campaignCode": campaignCode,
             "SubscriberKey": "{{Contact.Key}}",
             "Mobile": "{{Contact.Attribute.Test_IVR.Mobile}}"
         }];
@@ -111,9 +108,6 @@ define(['postmonger'], function (Postmonger) {
                 if (key === "campaignCode") {
                     campaignCode = val;
                 }
-                if (key === "mobileNumber") {
-                    mobileNumber = val;
-                }
             });
         });
       
@@ -123,7 +117,6 @@ define(['postmonger'], function (Postmonger) {
             // If there is a message, skip to the summary step
         }else {
             $("#campaignCode").val(campaignCode);
-            $("#mobileNumber").val(mobileNumber);
           }
         };
 
