@@ -5,8 +5,6 @@ define(['postmonger'], function (Postmonger) {
     let authTokens = {};
     let payload = {};
     let campaignCode = '';
-    let Mobile = ''; 
-    let SubscriberKey = '';
 
     // Configuration variables
     let eventSchema = ''; // variable is used in parseEventSchema()
@@ -69,7 +67,7 @@ define(['postmonger'], function (Postmonger) {
         payload["arguments"].execute.inArguments = [{ 
             "campaignCode": campaignCode,
             "SubscriberKey": "{{Contact.Key}}",
-            "Mobile": "{{Contact.Attribute.Test_IVR.Mobile}}"
+            "MobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"
         }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
