@@ -71,8 +71,8 @@ define(['postmonger'], function (Postmonger) {
         payload["arguments"].execute.inArguments = [{ 
             "campaignCode": campaignCode, 
             "mobileNumber": mobileNumber,
-            "Mobile" : Mobile,
-            "SubscriberKey" : SubscriberKey 
+            "SubscriberKey": "{{Contact.Key}}",
+            "Mobile": "{{Contact.Attribute.Sms_test_2.Mobile}}"
         }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
@@ -113,12 +113,6 @@ define(['postmonger'], function (Postmonger) {
                 }
                 if (key === "mobileNumber") {
                     mobileNumber = val;
-                }
-                if (key === "SubscriberKey") {
-                    SubscriberKey = val;
-                }
-                if (key === "Mobile") {
-                    Mobile = val;
                 }
             });
         });
