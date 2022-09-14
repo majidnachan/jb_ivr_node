@@ -4,8 +4,10 @@ define(['postmonger'], function (Postmonger) {
     let connection = new Postmonger.Session();
     let authTokens = {};
     let payload = {};
-    let campaignCode = '';
+    let campaignCode = ''; 
     let mobileNumber = '';
+    let Mobile = ''; 
+    let SubscriberKey = '';
 
     // Configuration variables
     let eventSchema = ''; // variable is used in parseEventSchema()
@@ -66,7 +68,12 @@ define(['postmonger'], function (Postmonger) {
         // set by this activity's config.json file.  Any property
         // may be overridden as desired.
     
-        payload["arguments"].execute.inArguments.push({ campaignCode: campaignCode, mobileNumber: mobileNumber });
+        payload["arguments"].execute.inArguments = [{ 
+            "campaignCode": campaignCode, 
+            "mobileNumber": mobileNumber,
+            "Mobile" : Mobile,
+            "SubscriberKey" : SubscriberKey 
+        }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
         console.log(payload);
@@ -106,6 +113,12 @@ define(['postmonger'], function (Postmonger) {
                 }
                 if (key === "mobileNumber") {
                     mobileNumber = val;
+                }
+                if (key === "SubscriberKey") {
+                    SubscriberKey = val;
+                }
+                if (key === "Mobile") {
+                    Mobile = val;
                 }
             });
         });
