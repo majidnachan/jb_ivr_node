@@ -78,7 +78,6 @@ exports.save = function (req, res) {
  */
 exports.execute = function (req, res) {
     console.log("================Execute================");
-    console.log(util.inspect(req.body));
     JWT(req.body, process.env.JWT_TOKEN, (err, decoded) => {
         // verification error -> unauthorized request
         if (err) {
@@ -88,6 +87,7 @@ exports.execute = function (req, res) {
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             // console.log('##### decoded ####=>', decoded);
+            console.log('##### Subscriber Key ####=>', decoded.inArguments[0].subscriberKey);
             console.log('##### Campaign Code ####=>', decoded.inArguments[0].campaignCode);
             console.log('##### Mobile Number ####=>', decoded.inArguments[0].mobileNumber);
 
