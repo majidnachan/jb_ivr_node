@@ -72,7 +72,7 @@ define(['postmonger'], function (Postmonger) {
             "campaignCode": campaignCode, 
             "mobileNumber": mobileNumber,
             "SubscriberKey": "{{Contact.Key}}",
-            "Mobile": "{{Contact.Attribute.Sms_test_2.Mobile}}"
+            "Mobile": "{{Contact.Attribute.Test_IVR.Mobile}}"
         }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);

@@ -23,7 +23,7 @@
         {
             "inArguments": [
                 { "SubscriberKey": "{{Contact.Key}}"},
-                { "Mobile": "{{Contact.Attribute.Sms_test_2.Mobile}}"}
+                { "Mobile": "{{Contact.Attribute.Test_IVR.Mobile}}"}
             ],
             "outArguments": [],
             "url": "https://ivrdev.gourl.in/execute",
