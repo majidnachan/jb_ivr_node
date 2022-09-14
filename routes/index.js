@@ -1,11 +1,8 @@
-"use strict";
+/*"use strict";
 
 // Deps
 var activity = require("./activity");
 
-/*
- * GET home page.
- */
 exports.index = function(req, res) {
 	console.log(req);
 	if (!req.session.token) {
@@ -29,3 +26,5 @@ exports.login = function(req, res) {
 exports.logout = function(req, res) {
 	req.session.token = "";
 };
+
+*/
