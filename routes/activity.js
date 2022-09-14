@@ -34,7 +34,7 @@ function logData(req) {
         originalUrl: req.originalUrl
     });
     console.log("================================");
-    console.log("body: " + util.inspect(req.body));
+    // console.log("body: " + util.inspect(req.body));
     console.log("headers: " + JSON.stringify(req.headers));
     console.log("trailers: " + JSON.stringify(req.trailers));
     console.log("method: " + req.method);
@@ -77,34 +77,39 @@ exports.save = function (req, res) {
  * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
-    console.log("Execute called");
+    console.log("================Execute================");
     console.log(util.inspect(req.body));
     JWT(req.body, process.env.JWT_TOKEN, (err, decoded) => {
         // verification error -> unauthorized request
-        console.log(decoded);
         if (err) {
             console.error(err);
             return res.status(401).end();
         }
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
-            console.log('##### decoded ####=>', decoded);
+            // console.log('##### decoded ####=>', decoded);
+            console.log('##### Campaign Code ####=>', decoded.inArguments[0].campaignCode);
+            console.log('##### Mobile Number ####=>', decoded.inArguments[0].mobileNumber);
 
-            axios.post(process.env.IVR_URL, {
-                msisdn: '9820586859',
-                campaignId: '9900277',
-                vendorKey: 'vivaconnectobdapi@197'
-              })
-              .then(function (response) {
-                console.log(response.response);
-                res.status(200).send("Execute");
-              })
-              .catch(function (error) {
-                console.log(error);
+            if(decoded.inArguments[0].campaignCode && decoded.inArguments[0].mobileNumber){
+
+                axios.post(process.env.IVR_URL, {
+                    msisdn: decoded.inArguments[0].mobileNumber,
+                    campaignId: decoded.inArguments[0].campaignCode,
+                    vendorKey: 'vivaconnectobdapi@197'
+                })
+                .then(function (response) {
+                    console.log(response);
+                    res.status(200).send("Execute");
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    res.status(400).send("Execute");
+                });
+            }else {
+                console.error('inArguments invalid.');
                 res.status(400).send("Execute");
-              });
-
-            
+            }
         } else {
             console.error('inArguments invalid.');
             return res.status(400).end();
