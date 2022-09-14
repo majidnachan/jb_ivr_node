@@ -96,7 +96,7 @@ exports.execute = function (req, res) {
                 vendorKey: 'vivaconnectobdapi@197'
               })
               .then(function (response) {
-                console.log(response);
+                console.log(response.response);
                 res.status(200).send("Execute");
               })
               .catch(function (error) {
