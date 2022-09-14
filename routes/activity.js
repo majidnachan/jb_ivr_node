@@ -9,7 +9,7 @@ let axios = require("axios");
 const { Console } = require('console');
 
 // Global Variables
-const tokenURL = `${process.env.authenticationUrl}/v2/token`;
+// const tokenURL = `${process.env.authenticationUrl}/v2/token`;
 
 
 exports.logExecuteData = [];
@@ -79,7 +79,7 @@ exports.save = function (req, res) {
 exports.execute = function (req, res) {
     console.log("Execute called");
     console.log(util.inspect(req.body));
-    JWT(req.body, "r4Pbrt_109J7YLte-sndSwVbx7EZtr4FzsGZUYgTYlLRTWZEVdQV_ChYxedgw1XRkm0nwJnen0YBZMgx7tNOpzIAS4Edn82il2FcCYQMptmkn_6BQYQvp6i9FcIxodqHK9-zgS6_OJbYy-jPZru0Lviqs_Tv0ad5DiiHcANQE6GqRQy7vb3455eUF-veE_IQJSaaHDcwSfiRvKgt7jKR15ALnctwINGoUEgNA52m9QlV8cZDpXbwTRoHUVELog2", (err, decoded) => {
+    JWT(req.body, process.env.JWT_TOKEN, (err, decoded) => {
         // verification error -> unauthorized request
         console.log(decoded);
         if (err) {
@@ -89,7 +89,22 @@ exports.execute = function (req, res) {
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             console.log('##### decoded ####=>', decoded);
-            res.send(200, 'Execute');
+
+            axios.post(process.env.IVR_URL, {
+                msisdn: '9820586859',
+                campaignId: '9900277',
+                vendorKey: 'vivaconnectobdapi@197'
+              })
+              .then(function (response) {
+                console.log(response);
+                res.status(200).send("Execute");
+              })
+              .catch(function (error) {
+                console.log(error);
+                res.status(400).send("Execute");
+              });
+
+            
         } else {
             console.error('inArguments invalid.');
             return res.status(400).end();
@@ -138,7 +153,7 @@ exports.stop = function (req, res) {
  * This would return a access token that can be used to call additional Marketing Cloud APIs
  * 
  */
-function retrieveToken () {
+/*function retrieveToken () {
     axios.post(tokenURL, { // Retrieving of token
         grant_type: 'client_credentials',
         client_id: process.env.clientId,
@@ -149,4 +164,4 @@ function retrieveToken () {
     }).catch(function (error) {
         return error;
     });
-}
+}*/

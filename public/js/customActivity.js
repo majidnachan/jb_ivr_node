@@ -5,6 +5,7 @@ define(['postmonger'], function (Postmonger) {
     let authTokens = {};
     let payload = {};
     let campaignCode = '';
+    let mobileNumber = '';
 
     // Configuration variables
     let eventSchema = ''; // variable is used in parseEventSchema()
@@ -58,13 +59,14 @@ define(['postmonger'], function (Postmonger) {
     function save() {
         console.log("Saved called");
         campaignCode = $("#campaignCode").val();
+        mobileNumber = $("#mobileNumber").val();
 
         // 'payload' is initialized on 'initActivity' above.
         // Journey Builder sends an initial payload with defaults
         // set by this activity's config.json file.  Any property
         // may be overridden as desired.
     
-        payload["arguments"].execute.inArguments = [{ campaignCode: campaignCode }];
+        payload["arguments"].execute.inArguments = [{ campaignCode: campaignCode, mobileNumber: mobileNumber }];
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
 
@@ -97,20 +99,22 @@ define(['postmonger'], function (Postmonger) {
       
         $.each(inArguments, function (index, inArgument) {
             $.each(inArgument, function (key, val) {
-                console.log("Key : " + key);
-                console.log("val : " + val);
                 if (key === "campaignCode") {
                     campaignCode = val;
+                }
+                if (key === "mobileNumber") {
+                    mobileNumber = val;
                 }
             });
         });
       
-          // If there is no message selected, disable the next button
+        // If there is no message selected, disable the next button
         if (!campaignCode) {
             connection.trigger("updateButton", { button: "next", text: "done", visible: true, enabled: false });
             // If there is a message, skip to the summary step
         }else {
             $("#campaignCode").val(campaignCode);
+            $("#mobileNumber").val(mobileNumber);
           }
         };
 
