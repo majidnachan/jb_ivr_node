@@ -66,7 +66,7 @@ define(['postmonger'], function (Postmonger) {
         // set by this activity's config.json file.  Any property
         // may be overridden as desired.
     
-        payload["arguments"].execute.inArguments = [{ campaignCode: campaignCode, mobileNumber: mobileNumber }];
+        payload["arguments"].execute.inArguments.push({ campaignCode: campaignCode, mobileNumber: mobileNumber });
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
 
@@ -84,7 +84,8 @@ define(['postmonger'], function (Postmonger) {
     function initialLoad(data) {
         if (data) {
             payload = data;
-          }
+        }
+        console.log(payload);
       
         let hasInArguments = Boolean(
             payload["arguments"] &&
