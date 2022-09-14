@@ -69,6 +69,7 @@ define(['postmonger'], function (Postmonger) {
         payload["arguments"].execute.inArguments.push({ campaignCode: campaignCode, mobileNumber: mobileNumber });
         payload["metaData"].isConfigured = true;
         connection.trigger("updateActivity", payload);
+        console.log(payload);
 
     }
 
