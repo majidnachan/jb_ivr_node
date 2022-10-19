@@ -23,7 +23,7 @@
         {
             "inArguments": [
                 { "subscriberKey": "{{Contact.Key}}"},
-                { "mobileNumber": "{{Contact.Attribute.Sms_test_2.Mobile}}"}
+                { "mobileNumber": "{{Contact.Attribute.MahindraOneInputSchemaDataArchive.mobile}}"}
             ],
             "outArguments": [],
             "url": "https://ivrdev.gourl.in/execute",
